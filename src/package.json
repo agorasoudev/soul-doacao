@@ -1,0 +1,31 @@
+{
+  "name": "soul-doacao",
+  "version": "1.0.0",
+  "description": "Projeto final do módulo de Nodejs voltado a uma aplicação de sistema de doação.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agorasoudev/soul-doacao.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agorasoudev/soul-doacao/issues"
+  },
+  "homepage": "https://github.com/agorasoudev/soul-doacao#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15",
+    "sucrase": "^3.20.3",
+    "swagger-autogen": "^2.18.8",
+    "swagger-ui-express": "^4.3.0"
+  }
+}
