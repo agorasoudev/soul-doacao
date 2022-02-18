@@ -9,7 +9,7 @@ import VoluntarioController from '../app/controllers/VoluntarioController';
 const routes = new Router()
 
 routes.post('/create', OngController.create)
-routes.post('/createdoacao', DoacaoController.createDoacao)
+routes.post('/createdoacao/:id', DoacaoController.createDoacao)
 routes.post('/createdoador', DoadorController.create)
 
 

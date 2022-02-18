@@ -8,12 +8,14 @@ const Ong = model(
         segmento: String,
         cnpj: String,
         n_funcionarios: Number,
-        voluntarios: Array,
+        voluntarios: [],
         contato: {
             email: String,
             telefone: String,
             site: String,
         },
+        caixa:Number,
+        doacoes: [],
     })
 );
 

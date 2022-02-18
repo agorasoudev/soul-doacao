@@ -4,13 +4,14 @@ const Doacao = model( // Cria o modelo do MongoDB
     "Doacao", 
     new Schema({
         metodo: String,
-        doador: String,
+        email: String,
         ong: String,
         valor: Number,
         item: {
             objeto: String,
             quantidade: Number,
-        }
+        },
+        hash: String,
     })
 );
 
