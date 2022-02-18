@@ -10,7 +10,7 @@ const Doador = model(
         },
         estado: String,
         anonimo: String,
-        doacao: Array
+        doacao: []
     })
 );
 
