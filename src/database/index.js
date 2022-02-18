@@ -7,6 +7,6 @@ async function main() {
 
 main()
     .then(() => console.log("Conectado ao Mongo"))
-    .catch((err) => console.log(err));
+    .catch(() => console.log('Mongo não conectado'));
 
 module.exports = mongoose;
