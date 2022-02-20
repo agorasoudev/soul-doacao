@@ -5,6 +5,7 @@ import DoadorController from '../app/controllers/DoadorController';
 
 
 import VoluntarioController from '../app/controllers/VoluntarioController';
+import DoadorController from '../app/controllers/DoadorController';
 
 const routes = new Router()
 
@@ -14,9 +15,9 @@ routes.get('/ong/:id', OngController.show)
 routes.patch('/ong/:id', OngController.update)
 routes.delete('/ong', OngController.destroy)
 routes.post('/createdoacao/:id', DoacaoController.createDoacao)
-routes.post('/createdoador', DoadorController.create)
 
 
 routes.post('/create/voluntario', VoluntarioController.store)
+routes.post('/create/doador', DoadorController.store)
 
 export default routes
