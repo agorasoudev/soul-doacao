@@ -62,7 +62,7 @@ class DoacaoController {
         }); */
         // Cria a doação
 
-        return res.json(doacao_doc); // Retorna a doação
+        return res.status(201).json(doacao_doc); // Retorna a doação
     }
 }
 
