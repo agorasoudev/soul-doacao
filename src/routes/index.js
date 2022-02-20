@@ -13,6 +13,6 @@ routes.post('/createdoacao/:id', DoacaoController.createDoacao)
 routes.post('/createdoador', DoadorController.create)
 
 
-routes.post('/create/voluntario', VoluntarioController.create)
+routes.post('/create/voluntario', VoluntarioController.store)
 
 export default routes

@@ -1,16 +1,20 @@
 import Voluntario from '../models/Voluntario';
 
 class VoluntarioController {
-  static async create(req,res){
-    const { name, contato, funcao, ong} = req.body;
+  static async store(req,res){
+    const { name, contato, funcao} = req.body;
     const voluntario = Voluntario({
       name,
       contato,
-      funcao,
-      ong
+      funcao
     });
+
+    if(!name || !voluntario.contato.telefone || !voluntario.contato.email) {
+      return res.status(402).json({message: 'voluntario-parametros-vazios'})
+    }
+
     await voluntario.save();
-    return res.json(voluntario);
+    return res.status(201).json({message: `voluntario-${voluntario.name}-cadastrado}`});
   }
 }
 
