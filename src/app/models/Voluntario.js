@@ -3,13 +3,12 @@ import { model, Schema } from "mongoose";
 const Voluntario = model(
     "Voluntario",
     new Schema({
-        name: String,
+        name: {type: String, required: true},
         contato: {
-            telefone: String,
-            email: String,
+            telefone: {type: String, required: true},
+            email: {type: String, required: true},
         },
-        funcao: String,
-        ong: [],
+        funcao: {type: String}
     })
 );
 
