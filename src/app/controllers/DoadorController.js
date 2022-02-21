@@ -56,6 +56,22 @@ class DoadorController {
             return res.status(400).json({message: 'Erro na atualização de Doador'})
         }
     }
+
+    static async destroy(req, res){
+       
+        try {
+            const { id } = (req.params);
+            const doador = await Doador.findByIdAndDelete(id);
+            console.log(id, doador)
+            if(!id){
+                return res.status(404).json({message: 'Doador não encontrado'})
+            } else {
+                res.status(200).json({message: `Doador ${doador.id} excluído com sucesso`})   
+            }
+        } catch (err) {
+          return res.status(400).json({message:'Erro na exclusão de Doador'})
+        }
+    }
 }
 
 export default DoadorController;
