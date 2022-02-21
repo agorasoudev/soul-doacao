@@ -1,7 +1,7 @@
 import Doador from '../models/Doador';
 
 class DoadorController {
-        static async store(req, res){
+    static async store(req, res){
         const { name, contato, estado, anonimo, doacao } = req.body;
         const doador = Doador ({
             name,
@@ -41,6 +41,19 @@ class DoadorController {
 
         } catch (err) {
             return res.status(400).json({message: "Enquadramento de mensagem de requisição inválida"});
+        }
+    }
+
+    static async update(req, res){
+        try {
+            const doador = await Doador.findByIdAndUpdate(req.params.id, req.body, {new: true})
+            if(!doador){
+                return res.status(404).json({message: 'Doador não encontrado'})
+            } else {
+                return res.status(200).json({message: `Doador ${doador.name} atualizado com sucesso`})
+            }
+        } catch (err) {
+            return res.status(400).json({message: 'Erro na atualização de Doador'})
         }
     }
 }
