@@ -21,5 +21,7 @@ routes.post('/create/voluntario', VoluntarioController.store)
 routes.post('/create/doador', DoadorController.store)
 routes.get('/voluntarios', VoluntarioController.index)
 routes.get('/voluntario/:id', VoluntarioController.show)
+routes.get('/doadores', DoadorController.index)
+routes.get('/doador/:id', DoadorController.show)
 
 export default routes
