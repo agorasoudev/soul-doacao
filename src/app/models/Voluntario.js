@@ -8,7 +8,7 @@ const Voluntario = model(
             telefone: {type: String, required: true},
             email: {type: String, required: true},
         },
-        funcao: {type: String}
+        funcao: {type: String, required: false}
     })
 );
 
