@@ -25,5 +25,6 @@ routes.get('/doadores', DoadorController.index)
 routes.get('/doador/:id', DoadorController.show)
 routes.patch('/voluntario/:id', VoluntarioController.update)
 routes.patch('/doador/:id', DoadorController.update)
+routes.delete('/doador/:id', DoadorController.destroy)
 
 export default routes
