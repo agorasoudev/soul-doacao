@@ -142,7 +142,8 @@ class OngController {
     static async destroy(req, res) {
         // #swagger.tags=["ONGs"]
         // #swagger.description= "Informe o ID ou o E-mail da ONG que deseja deletar. OBS: Caso informe os 2, o ID será priorizado"
-        const { id, email } = req.body;
+        const { id,email } = req.body;
+        
         if (!id && !email) {
             return res.status(400).json({
                 message: "É necessário informar o ID ou o E-mail da ONG",
@@ -165,10 +166,12 @@ class OngController {
             }
         } else {
             try {
-                const ong = await Ong.findOneAndDelete({ email });
+                console.log(email);
+                const ong = await Ong.findOneAndDelete({"contato.email": {$in: email}});
+                console.log('ONG=> ',ong);
                 if (ong) {
                     return res
-                        .status(200)
+                        .status(200)                                    
                         .json({ message: "ONG deletada com sucesso" });
                 } else {
                     return res
