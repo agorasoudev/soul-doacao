@@ -13,7 +13,7 @@ routes.get('/ongs', OngController.index)
 routes.get('/ong/:id', OngController.show)
 routes.patch('/ong/:id', OngController.update)
 routes.delete('/ong', OngController.destroy)
-routes.post('/createdoacao/:id', DoacaoController.createDoacao)
+routes.post('/createdoacao/:id', DoacaoController.store)
 routes.post('/createdoador', DoadorController.create)
 
 
