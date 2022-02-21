@@ -5,8 +5,8 @@ const Doador = model(
     new Schema({
         name: String,
         contato: {
-            telefone: String,
-            email: String,
+            telefone: {type: String, required: true},
+            email: {type: String, required: true},
         },
         estado: String,
         anonimo: String,

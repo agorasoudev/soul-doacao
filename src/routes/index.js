@@ -5,6 +5,7 @@ import DoadorController from '../app/controllers/DoadorController';
 
 
 import VoluntarioController from '../app/controllers/VoluntarioController';
+import DoadorController from '../app/controllers/DoadorController';
 
 const routes = new Router()
 
@@ -18,8 +19,11 @@ routes.post('/createdoador', DoadorController.create)
 
 
 routes.post('/create/voluntario', VoluntarioController.store)
+routes.post('/create/doador', DoadorController.store)
 routes.get('/voluntarios', VoluntarioController.index)
 routes.get('/voluntario/:id', VoluntarioController.show)
+routes.get('/doadores', DoadorController.index)
+routes.get('/doador/:id', DoadorController.show)
 routes.patch('/voluntario/:id', VoluntarioController.update)
 
 export default routes
