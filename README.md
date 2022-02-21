@@ -4,34 +4,55 @@
 </div>
 <br>
 <div>
-  <h2>Objetivo:</h2>
+  <h2>&rArr; Objetivo &lArr;</h2>
   <p>Construir uma REST API em MongoDB que permita fazer a adição de diversas ONGS e a funcionalidade de realizar doações para a mesma.</P>
-  <h3>Requisitos da aplicação</h3>
+  <h3>&rarr; Requisitos da aplicação &larr; </h3>
   <ul>
     <li>Deve realizar CRUD de ONGs</li>
     <li>Deve permitir a realização de doações (pagamento fictício)</li>
   </ul>
+  <h3>&rarr; Realizações &larr; </h3>
+  <ul>
+    <li>CRUD de ONGs, Voluntários, Doadores e Doações.</li>
+    <li>O Doador pode doar valores monetários ou itens</li>
+    <li>Ao realizar uma doação, os itens doados são registrados na ONG e o ID da doação atrelado ao doador.</li>
+    <li>Ao se deletar uma doação, o seu ID será excluído do doador e os itens doados removidos da ONG.</li>
+  </ul>
 </div>
 <br>
 <div>
-  <h2>Tecnologias & Ferramentas utilizadas</h2>
-  <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
-  <img src="https://img.shields.io/badge/nodemon-4EA94B?style=for-the-badge&logo=nodemon&logoColor=gray">
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
-  <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB">
-  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white">
-  <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
-</div>
-<br>
-<div>
-  <h2>Utilização da API</h2>
+  <h2>&rArr; Tecnologias & Ferramentas utilizadas &lArr;</h2>
   <br>
-  <h3>Clonagem do repositório</h3>
+  <div>
+    <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/agorasoudev/soul-doacao?style=plastic">
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/agorasoudev/soul-doacao?style=plastic">
+    <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github.com/agorasoudev/soul-doacao?style=plastic">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/agorasoudev/soul-doacao?color=red&style=plastic">
+    <img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed/agorasoudev/soul-doacao?color=green&style=plastic">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/agorasoudev/soul-doacao?color=blue&style=plastic">
+    <img alt="GitHub" src="https://img.shields.io/github/license/agorasoudev/soul-doacao?color=important&style=plastic">
+  </div>
+  <br>
+  <div>
+    <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
+    <img src="https://img.shields.io/badge/nodemon-4EA94B?style=for-the-badge&logo=nodemon&logoColor=gray">
+    <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB">
+    <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
+    <img src="https://img.shields.io/badge/Sucrase-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white">
+    <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white">
+  </div>
+</div>
+<br>
+<div>
+  <h2>&rArr; Utilização da API &lArr;</h2>
+  <br>
+  <h3>&rarr; Clonagem do repositório &larr; </h3>
 
 ```shell
 git clone https://github.com/agorasoudev/soul-doacao.git
 ```
-  <h3>Preparando o ambiente</h3>
+  <h3>&rarr; Preparando o ambiente &larr; </h3>
 <ol>
 <li>Primeiro instalamos as dependências.
 
@@ -44,27 +65,86 @@ npm install
 </ol>
   
 
-  <h3>Inicializar o servidor</h3>
+  <h3>&rarr; Inicializar o servidor &larr; </h3>
 
 ```shell
 npm run dev
 ```
 
-<h3>Utilizando os End-Points</h3>
+<h3>&rarr; Utilizando os End-Points &larr; </h3>
 <details>
   <summary>Ongs</summary>
   <ul>
-    <li>Criação: localhost:3333/ong/new</li>
+    <li>Create: POST: localhost:3333/ong/new
+    <p>Todos os campos com exceção de site e telefone são obrigatórios para se registrar uma ONG.</p>
+    <p>Segue exemplo de JSON.:</p>
+
+```shell
+{
+  "name" : "Soul Doação",
+  "endereco" : "Rua Angra dos Reis",
+  "segmento" : "Conectividade",
+  "cnpj" : "80.580.861/0001-25",
+  "n_funcionarios" : 4,
+  "contato" : {
+      "email" :"soudoacao@gmail.com",
+      "site" : "https://soudoacao.com.br",
+      "telefone" : "11999999999"
+      },
+  "caixa" : 100
+}
+```
+  </li>
+  <li>Read All: GET: <code>localhost:3333/ongs</code> 
+  <p>Ao executar, será retornado uma lista com todas as ONGS cadastradas.</p>
+  </li>
+  <li>Read One: GET: <code>localhost:3333/ong/:id</code>
+  <p>Necessário informar o ID da ong na URI.</p>
+  <p>O ID será gerado automaticamente na hora da criação da ONG</p>
+  <p>Passar o que deseja alterar no body. (os campos não são obrigatórios)</p>
+
+  ```shell
+{
+  "name" : "Soul Doação",
+  "endereco" : "Rua Angra dos Reis",
+  "segmento" : "Conectividade",
+  "cnpj" : "80.580.861/0001-25",
+  "n_funcionarios" : 4,
+  "contato" : {
+      "email" :"soudoacao@gmail.com",
+      "site" : "https://soudoacao.com.br",
+      "telefone" : "11999999999"
+      },
+  "caixa" : 100
+}
+```
+  </li>
+  <li>UPDATE: PATCH: <code>localhost:3333/ong/:id</code>
+  <p>Necessário informar o ID da ong na URI.</p>
+  <p>O ID será gerado automaticamente na hora da criação da ONG</p>
+  </li>
+  <li>DESTROY: DELETE: <code>localhost:3333/ong</code>
+  <p>Informe o ID ou o E-mail da ONG que deseja deletar no body.</p>
+  <p>OBS: Caso informe os 2, o ID será priorizado</p>
+
+  ```shell
+  {
+    "id" : "5e9f8f8f8f8f8f8f8f8f8f8",
+    "email" :"soudoacao@gmail.com"
+  }
+  ```
+  </li>
   </ul>
 </details>
 </div>
 <br>
 <div>
-  <h2>Equipe de desenvolvimento</h2>
+  <h2>&rArr; Equipe de desenvolvimento &lArr;</h2>
+  <br>
   <ul>
     <!-- ALEXANDRE -->
     <li>
-      <img src="https://img.shields.io/badge/dev-Alexandre%20Salgueiro-blueviolet">
+      <img src="https://img.shields.io/badge/dev-Alexandre%20Barbosa-blueviolet">
       <a href="https://github.com/alesalg">
         <img src="https://img.shields.io/badge/GitHub-100000?&logo=github&logoColor=white">
       </a>
@@ -104,11 +184,11 @@ npm run dev
     </li>
     <!-- Rafaela -->
     <li>
-      <img src="https://img.shields.io/badge/dev-Rafaela%20Dev-blueviolet">
+      <img src="https://img.shields.io/badge/dev-Rafaella%20Brunorio-blueviolet">
       <a href="https://github.com/Rafafdev">
         <img src="https://img.shields.io/badge/GitHub-100000?&logo=github&logoColor=white">
       </a>
-      <a href="#">
+      <a href="https://www.linkedin.com/in/rafaella-brunorio-329931203">
         <img src="https://img.shields.io/badge/LinkedIn-0077B5?&logo=linkedin&logoColor=white">
       </a>
     </li>

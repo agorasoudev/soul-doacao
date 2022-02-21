@@ -1,0 +1,410 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Soul Doações",
+    "description": "API para integração entre ONGs e doadores"
+  },
+  "host": "localhost:3333",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "ONGs",
+      "description": "EndPoint para ONGs"
+    },
+    {
+      "name": "Doador",
+      "description": "EndPoint para ONGs"
+    },
+    {
+      "name": "Doação",
+      "description": "EndPoint para ONGs"
+    },
+    {
+      "name": "Voluntário",
+      "description": "EndPoint para ONGs"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/create": {
+      "post": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "Cadastra uma ONG",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados da ONG - os únicos dados não obrigatórios são o telefone e o site presentes no contato",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Soul Doação"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua Angra dos Reis"
+                },
+                "segmento": {
+                  "type": "string",
+                  "example": "Conectividade"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "80.580.861/0001-25"
+                },
+                "n_funcionarios": {
+                  "type": "number",
+                  "example": 4
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "soudoacao@gmail.com"
+                    },
+                    "site": {
+                      "type": "string",
+                      "example": "https://soudoacao.com.br"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "11999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "site",
+                    "telefone"
+                  ]
+                },
+                "caixa": {
+                  "type": "number",
+                  "example": 100
+                }
+              },
+              "required": [
+                "name",
+                "endereco",
+                "segmento",
+                "cnpj",
+                "n_funcionarios",
+                "contato",
+                "caixa"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/ongs": {
+      "get": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "End Point exibe todas as ONGs cadastradas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ong/{id}": {
+      "get": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da ONG"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "Atualização de uma ONG",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados da ONG",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Soul Doação"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua Angra dos Reis"
+                },
+                "segmento": {
+                  "type": "string",
+                  "example": "Conectividade"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "80.580.861/0001-25"
+                },
+                "n_funcionarios": {
+                  "type": "number",
+                  "example": 4
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "soudoacao@gmail.com"
+                    },
+                    "site": {
+                      "type": "string",
+                      "example": "https://soudoacao.com.br"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "11999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "site",
+                    "telefone"
+                  ]
+                },
+                "caixa": {
+                  "type": "number",
+                  "example": 100
+                }
+              },
+              "required": [
+                "name",
+                "endereco",
+                "segmento",
+                "cnpj",
+                "n_funcionarios",
+                "contato",
+                "caixa"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ong": {
+      "delete": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "Informe o ID ou o E-mail da ONG que deseja deletar. OBS: Caso informe os 2, o ID será priorizado",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/createdoacao/{id}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "metodo": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "ong": {
+                  "example": "any"
+                },
+                "valor": {
+                  "example": "any"
+                },
+                "item": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/createdoador": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "contato": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                },
+                "anonimo": {
+                  "example": "any"
+                },
+                "doacao": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/create/voluntario": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "contato": {
+                  "example": "any"
+                },
+                "funcao": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    }
+  }
+}
