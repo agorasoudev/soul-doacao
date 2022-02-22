@@ -2,6 +2,31 @@ import Ong from "../models/Ong";
 
 class OngController {
     static async store(req, res) {
+        /* #swagger.tags=["ONGs"]
+        #swagger.description="Cadastra uma ONG"
+        #swagger.parameters['obj'] = [
+            {
+                "in": "body",
+                "description": "Dados da ONG - os únicos dados não obrigatórios são o telefone e o site presentes no contato",
+                "required": true,
+                "type":"string",
+                "schema": {
+                    $name : "Soul Doação",
+                    $endereco : "Rua Angra dos Reis",
+                    $segmento : "Conectividade",
+                    $cnpj : "80.580.861/0001-25",
+                    $n_funcionarios : 4,
+                    $contato : {
+                        $email :"soudoacao@gmail.com",
+                        $site : "https://soudoacao.com.br",
+                        $telefone : "11999999999"
+                    },
+                    $caixa : 100
+                }
+            }
+        ]
+        */
+
         const empty = [];
         Object.keys(req.body).forEach((key) => {
             if (req.body[key] == "") {
@@ -40,6 +65,8 @@ class OngController {
     }
 
     static async index(req, res) {
+        // #swagger.tags=["ONGs"]
+        // #swagger.description= "End Point exibe todas as ONGs cadastradas"
         try {
             const ongs = await Ong.find();
             if (ongs.length > 0) {
@@ -55,6 +82,9 @@ class OngController {
     }
 
     static async show(req, res) {
+        // #swagger.tags=["ONGs"]
+        // #swagger.description= End Point exibe apenas uma ONG cadastrada passando o ID
+        // #swagger.parameters['id'] = { description: 'ID da ONG', type: 'string', required: true }
         try {
             const ong = await Ong.findById(req.params.id);
             if (!ong) {
@@ -63,11 +93,38 @@ class OngController {
                 return res.status(200).json(ong);
             }
         } catch (err) {
-            return res.status(400).json({ message: "ID informado não é uma string de 12 bytes ou uma string de 24 caracteres hex" });
+            return res.status(400).json({
+                message:
+                    "ID informado não é uma string de 12 bytes ou uma string de 24 caracteres hex",
+            });
         }
     }
 
     static async update(req, res) {
+        /* #swagger.tags=["ONGs"]
+        #swagger.description="Atualização de uma ONG"
+        #swagger.parameters['obj'] = [
+            {
+                "in": "body",
+                "description": "Dados da ONG",
+                "required": false,
+                "type":"string",
+                "schema": {
+                    $name : "Soul Doação",
+                    $endereco : "Rua Angra dos Reis",
+                    $segmento : "Conectividade",
+                    $cnpj : "80.580.861/0001-25",
+                    $n_funcionarios : 4,
+                    $contato : {
+                        $email :"soudoacao@gmail.com",
+                        $site : "https://soudoacao.com.br",
+                        $telefone : "11999999999"
+                    },
+                    $caixa : 100
+                }
+            }
+        ]
+        */
         try {
             const ong = await Ong.findByIdAndUpdate(req.params.id, req.body, {
                 new: true,
@@ -83,36 +140,48 @@ class OngController {
     }
 
     static async destroy(req, res) {
-        const { id, email } = req.body;
-        if(!id || !email) {
-            return res.status(400).json({ message: "É necessário informar o ID ou o E-mail da ONG" });
+        // #swagger.tags=["ONGs"]
+        // #swagger.description= "Informe o ID ou o E-mail da ONG que deseja deletar. OBS: Caso informe os 2, o ID será priorizado"
+        const { id,email } = req.body;
+        
+        if (!id && !email) {
+            return res.status(400).json({
+                message: "É necessário informar o ID ou o E-mail da ONG",
+            });
         }
-        if(id){
+        if (id) {
             try {
                 const ong = await Ong.findByIdAndDelete(id);
                 if (ong) {
-                    return res.status(200).json({ message: "ONG deletada com sucesso" });
+                    return res
+                        .status(200)
+                        .json({ message: "ONG deletada com sucesso" });
                 } else {
-                    return res.status(404).json({ message: "ONG não encontrada" });
+                    return res
+                        .status(404)
+                        .json({ message: "ONG não encontrada" });
                 }
             } catch (err) {
                 return res.status(500).json({ message: "Erro ao deletar ONG" });
             }
         } else {
             try {
-                const ong = await Ong.findOneAndDelete({ email });
+                console.log(email);
+                const ong = await Ong.findOneAndDelete({"contato.email": {$in: email}});
+                console.log('ONG=> ',ong);
                 if (ong) {
-                    return res.status(200).json({ message: "ONG deletada com sucesso" });
+                    return res
+                        .status(200)                                    
+                        .json({ message: "ONG deletada com sucesso" });
                 } else {
-                    return res.status(404).json({ message: "ONG não encontrada" });
+                    return res
+                        .status(404)
+                        .json({ message: "ONG não encontrada" });
                 }
             } catch (err) {
                 return res.status(500).json({ message: "Erro ao deletar ONG" });
             }
         }
-
-
-        
     }
 }
 
