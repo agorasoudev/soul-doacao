@@ -1,0 +1,702 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Soul Doações",
+    "description": "API para integração entre ONGs e doadores"
+  },
+  "host": "localhost:3333",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "ONGs",
+      "description": "EndPoint para ONGs"
+    },
+    {
+      "name": "Doador",
+      "description": "EndPoint para Doadores"
+    },
+    {
+      "name": "Doação",
+      "description": "EndPoint para Doações"
+    },
+    {
+      "name": "Voluntário",
+      "description": "EndPoint para Voluntários"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/createdoacao/{id}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "metodo": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "ong": {
+                  "example": "any"
+                },
+                "valor": {
+                  "example": "any"
+                },
+                "item": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/doador/create": {
+      "post": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "Cadastra um Doador",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do Doador - os únicos dados obrigatórios são o nome e o email.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "José Vinicius"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "PE"
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "vini_dev@gmail.com"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "81999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "telefone"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "estado",
+                "contato"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
+    "/doadores": {
+      "get": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "End Point exibe todas os Doadores cadastrados",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
+    "/doador/{id}": {
+      "get": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do Doador"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "Atualização do Doador",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do Doador - os únicos dados obrigatórios são o nome e o email.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "José Vinicius"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "PE"
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "vini_dev@gmail.com"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "81999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "telefone"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "estado",
+                "contato"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "Informe o ID do Doador para deletar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ong/create": {
+      "post": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "Cadastra uma ONG",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados da ONG - os únicos dados não obrigatórios são o telefone e o site presentes no contato",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Soul Doação"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua Angra dos Reis"
+                },
+                "segmento": {
+                  "type": "string",
+                  "example": "Conectividade"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "80.580.861/0001-25"
+                },
+                "n_funcionarios": {
+                  "type": "number",
+                  "example": 4
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "soudoacao@gmail.com"
+                    },
+                    "site": {
+                      "type": "string",
+                      "example": "https://soudoacao.com.br"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "11999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "site",
+                    "telefone"
+                  ]
+                },
+                "caixa": {
+                  "type": "number",
+                  "example": 100
+                }
+              },
+              "required": [
+                "name",
+                "endereco",
+                "segmento",
+                "cnpj",
+                "n_funcionarios",
+                "contato",
+                "caixa"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/ongs": {
+      "get": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "End Point exibe todas as ONGs cadastradas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ong/{id}": {
+      "get": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da ONG"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "Atualização de uma ONG",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados da ONG",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Soul Doação"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua Angra dos Reis"
+                },
+                "segmento": {
+                  "type": "string",
+                  "example": "Conectividade"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "80.580.861/0001-25"
+                },
+                "n_funcionarios": {
+                  "type": "number",
+                  "example": 4
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "soudoacao@gmail.com"
+                    },
+                    "site": {
+                      "type": "string",
+                      "example": "https://soudoacao.com.br"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "11999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "site",
+                    "telefone"
+                  ]
+                },
+                "caixa": {
+                  "type": "number",
+                  "example": 100
+                }
+              },
+              "required": [
+                "name",
+                "endereco",
+                "segmento",
+                "cnpj",
+                "n_funcionarios",
+                "contato",
+                "caixa"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ong": {
+      "delete": {
+        "tags": [
+          "ONGs"
+        ],
+        "description": "Informe o ID ou o E-mail da ONG que deseja deletar. OBS: Caso informe os 2, o ID será priorizado",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/voluntario/create": {
+      "post": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "Cadastra um voluntário",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do Voluntário",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Alexandre"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "ale@gmail.com"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "11999999999"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "telefone"
+              ]
+            },
+            "$função": "Diretor"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/voluntarios": {
+      "get": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "End Point exibe todos os Voluntários cadastradas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
+    "/voluntario/{id}": {
+      "get": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do voluntário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "Atualização do voluntário",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do voluntário",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Alexandre"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "ale@gmail.com"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "11999999999"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "telefone"
+              ]
+            },
+            "$função": "Diretor"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "Informe o ID do voluntário que deseja deletar.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  }
+}

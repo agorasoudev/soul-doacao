@@ -8,7 +8,6 @@ const Ong = model(
         segmento: { type: String, required: true },
         cnpj: { type: String, required: true },
         n_funcionarios: { type: Number, required: true },
-        voluntarios: [],
         contato: {
             email: { type: String, required: true },
             telefone: { type: String, required: false },

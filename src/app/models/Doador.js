@@ -3,14 +3,14 @@ import { model, Schema } from 'mongoose';
 const Doador = model(
     "Doador",
     new Schema({
-        name: String,
+        name: { type: String, required: true },
         contato: {
-            telefone: {type: String, required: true},
-            email: {type: String, required: true},
+            telefone: { type: String, required: false },
+            email: { type: String, required: true },
         },
-        estado: String,
-        anonimo: String,
-        doacao: []
+        estado: { type: String, required: false },
+        anonimo: { type: Boolean, required: false },
+        doacao: [],
     })
 );
 
