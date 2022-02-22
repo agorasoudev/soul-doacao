@@ -1,4 +1,5 @@
 import Ong from "../models/Ong";
+import Organization from "../models/SeqOng";
 
 class OngController {
     static async store(req, res) {
@@ -60,6 +61,17 @@ class OngController {
                 caixa,
             });
             await ong.save();
+
+            const osc = {
+                name,
+                cnpj,
+                email: contato.email,
+                telefone: contato.telefone,
+                caixa,
+                id_doc_ong: ong._id.toString(),
+            }
+            await Organization.create(osc);
+
             return res.status(201).json(ong);
         }
     }

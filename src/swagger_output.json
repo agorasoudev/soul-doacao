@@ -5,7 +5,7 @@
     "title": "Soul Doações",
     "description": "API para integração entre ONGs e doadores"
   },
-  "host": "localhost:3333",
+  "host": "localhost:3335",
   "basePath": "/",
   "tags": [
     {
@@ -639,25 +639,44 @@
                   "type": "string",
                   "example": "Alexandre"
                 },
-                "email": {
-                  "type": "string",
-                  "example": "ale@gmail.com"
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "ale@gmail.com"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "11999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "telefone"
+                  ]
                 },
-                "telefone": {
+                "função": {
                   "type": "string",
-                  "example": "11999999999"
+                  "example": "Diretor"
                 }
               },
               "required": [
                 "name",
-                "email",
-                "telefone"
+                "contato",
+                "função"
               ]
-            },
-            "$função": "Diretor"
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
       }
     },
     "/voluntarios": {

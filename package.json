@@ -20,7 +20,9 @@
     "homepage": "https://github.com/agorasoudev/soul-doacao#readme",
     "dependencies": {
         "express": "^4.17.3",
-        "mongoose": "^6.2.2"
+        "mongoose": "^6.2.2",
+        "mysql2": "^2.3.3",
+        "sequelize": "^6.16.2"
     },
     "devDependencies": {
         "dotenv": "^16.0.0",

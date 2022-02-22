@@ -1,8 +1,9 @@
-import Voluntario from '../models/Voluntario';
+import Voluntario from "../models/Voluntario";
+import Voluntary from "../models/SeqVoluntario";
 
 class VoluntarioController {
-  static async store(req,res){
-      /* #swagger.tags=["Voluntário"]
+    static async store(req, res) {
+        /* #swagger.tags=["Voluntário"]
         #swagger.description="Cadastra um voluntário"
         #swagger.parameters['obj'] = [
             {
@@ -12,6 +13,7 @@ class VoluntarioController {
                 "type":"string",
                 "schema": {
                     $name : "Alexandre",
+                    $contato:{
                         $email :"ale@gmail.com",
                         $telefone : "11999999999"
                     },
@@ -20,59 +22,73 @@ class VoluntarioController {
             }
         ]
         */
-      const { name, contato, funcao } = req.body;
-      const voluntario = Voluntario({
-          name,
-          contato,
-          funcao,
-      });
+        const { name, contato, funcao } = req.body;
+        const voluntario = Voluntario({
+            name,
+            contato,
+            funcao,
+        });
 
-      if (!name || !voluntario.contato.telefone || !voluntario.contato.email) {
-          return res.status(402).json({ message: "Parametros vazios" });
-      }
+        if (
+            !name ||
+            !voluntario.contato.telefone ||
+            !voluntario.contato.email
+        ) {
+            return res.status(402).json({ message: "Parametros vazios" });
+        }
 
-      await voluntario.save();
-      return res
-          .status(201)
-          .json({ message: `Voluntário ${voluntario.name} cadastrado` });
-  }
-  
-  static async index(req, res){
-      // #swagger.tags=["Voluntário"]
-      // #swagger.description= "End Point exibe todos os Voluntários cadastradas"
-      const voluntarios = await Voluntario.find();
+        await voluntario.save();
 
-      if (voluntarios.length === 0) {
-          res.status(402).json({ message: "Lista de Voluntarios Vazia" });
-          return;
-      }
+        const voluntary = {
+            name,
+            email: contato.email,
+            telefone: contato.telefone,
+            id_documento: voluntario._id.toString()
+        }
 
-      res.status(200).json(voluntarios);
-  }
+        await Voluntary.create(voluntary);
 
-  static async show(req, res){
-      // #swagger.tags=["Voluntário"]
-      // #swagger.description= End Point exibe apenas um voluntário cadastrada passando o ID
-      // #swagger.parameters['id'] = { description: 'ID do voluntário', type: 'string', required: true }
-      try {
-          const voluntario = await Voluntario.findById(req.params.id);
-          if (!voluntario) {
-              return res
-                  .status(404)
-                  .json({ message: "Voluntario não encontrado" });
-          } else {
-              return res.status(200).json(voluntario);
-          }
-      } catch (err) {
-          return res.status(400).json({
-              message:
-                  "ID informado não é uma string de 12 bytes ou uma string de 24 caracteres hex",
-          });
-      }
-  }
+        return res
+            .status(201)
+            .json({ message: `Voluntário ${voluntario.name} cadastrado` });
+    }
 
-  static async update(req, res){
-      /* #swagger.tags=["Voluntário"]
+    static async index(req, res) {
+        // #swagger.tags=["Voluntário"]
+        // #swagger.description= "End Point exibe todos os Voluntários cadastradas"
+        const voluntarios = await Voluntario.find();
+
+        if (voluntarios.length === 0) {
+            res.status(402).json({ message: "Lista de Voluntarios Vazia" });
+            return;
+        }
+
+        res.status(200).json(voluntarios);
+    }
+
+    static async show(req, res) {
+        // #swagger.tags=["Voluntário"]
+        // #swagger.description= End Point exibe apenas um voluntário cadastrada passando o ID
+        // #swagger.parameters['id'] = { description: 'ID do voluntário', type: 'string', required: true }
+        try {
+            const voluntario = await Voluntario.findById(req.params.id);
+            if (!voluntario) {
+                return res
+                    .status(404)
+                    .json({ message: "Voluntario não encontrado" });
+            } else {
+                return res.status(200).json(voluntario);
+            }
+        } catch (err) {
+            return res.status(400).json({
+                message:
+                    "ID informado não é uma string de 12 bytes ou uma string de 24 caracteres hex",
+            });
+        }
+    }
+
+    static async update(req, res) {
+        /* #swagger.tags=["Voluntário"]
         #swagger.description="Atualização do voluntário"
         #swagger.parameters['obj'] = [
             {
@@ -90,27 +106,27 @@ class VoluntarioController {
             }
         ]
         */
-      try {
-          const voluntario = await Voluntario.findByIdAndUpdate(
-              req.params.id,
-              req.body,
-              { new: true }
-          );
-          if (!voluntario) {
-              return res
-                  .status(404)
-                  .json({ message: "Voluntario não encontrado" });
-          } else {
-              return res.status(200).json({
-                  message: `Voluntario ${voluntario.name} atualizado`,
-              });
-          }
-      } catch (err) {
-          return res
-              .status(400)
-              .json({ message: "Erro ao atualizar voluntário" });
-      }
-  }
+        try {
+            const voluntario = await Voluntario.findByIdAndUpdate(
+                req.params.id,
+                req.body,
+                { new: true }
+            );
+            if (!voluntario) {
+                return res
+                    .status(404)
+                    .json({ message: "Voluntario não encontrado" });
+            } else {
+                return res.status(200).json({
+                    message: `Voluntario ${voluntario.name} atualizado`,
+                });
+            }
+        } catch (err) {
+            return res
+                .status(400)
+                .json({ message: "Erro ao atualizar voluntário" });
+        }
+    }
 
   static async destroy(req, res){
       // #swagger.tags=["Voluntário"]
