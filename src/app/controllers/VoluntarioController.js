@@ -128,29 +128,41 @@ class VoluntarioController {
         }
     }
 
-    static async destroy(req, res) {
-        // #swagger.tags=["Voluntário"]
-        // #swagger.description= "Informe o ID do voluntário que deseja deletar."
-        const { id } = req.body;
+  static async destroy(req, res){
+      // #swagger.tags=["Voluntário"]
+      // #swagger.description= "Informe o ID ou o E-mail do voluntário que deseja deletar. OBS: Caso informe os 2, o ID será priorizado"
+      
+      const { id, email } = req.body;
 
-        if (!id) {
+      if (!id && !email) {
+          return res
+              .status(400)
+              .json({ message: "É necessário informar o ID do voluntário" });
+      }
+      if (id) {
+          const voluntario = await Voluntario.findByIdAndDelete(id);
+          if (voluntario) {
+              return res
+                  .status(200)
+                  .json({ message: "Voluntario deletado com sucesso" });
+          } else {
+              return res
+                  .status(404)
+                  .json({ message: "Voluntario não encontrado" });
+          }
+      } else {
+          const voluntario = await Voluntario.findOneAndDelete({"contato.email": {$in: email}});
+          if (voluntario) {
             return res
-                .status(400)
-                .json({ message: "É necessário informar o ID do voluntário" });
+                .status(200)
+                .json({ message: "Voluntario deletado com sucesso" });
+        } else {
+            return res
+                .status(404)
+                .json({ message: "Voluntario não encontrado" });
         }
-        if (id) {
-            const voluntario = await Voluntario.findByIdAndDelete(id);
-            if (voluntario) {
-                return res
-                    .status(200)
-                    .json({ message: "Voluntario deletado com sucesso" });
-            } else {
-                return res
-                    .status(404)
-                    .json({ message: "Voluntario não encontrado" });
-            }
-        }
-    }
+      }
+  }
 }
 
 export default VoluntarioController;
