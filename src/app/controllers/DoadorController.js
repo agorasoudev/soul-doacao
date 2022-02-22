@@ -48,7 +48,7 @@ class DoadorController {
             name,
             email: contato.email,
             telefone: contato.telefone,
-            id_documento: doador._id.toString(),
+            id_doc_donator: doador._id.toString(),
         }
 
         await Donator.create(donator);

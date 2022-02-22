@@ -7,7 +7,7 @@ const Organization = db.define("Organization", {
         primaryKey: true,
         autoIncrement: true,
     },
-    cnpj:{
+    cnpj: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
@@ -25,12 +25,13 @@ const Organization = db.define("Organization", {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    caixa:{
+    caixa: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    id_documento: {
+    id_doc_ong: {
         type: DataTypes.STRING,
+        foreignKey: true,
         allowNull: false,
     },
 });

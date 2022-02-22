@@ -5,7 +5,7 @@
     "title": "Soul Doações",
     "description": "API para integração entre ONGs e doadores"
   },
-  "host": "localhost:3333",
+  "host": "localhost:3335",
   "basePath": "/",
   "tags": [
     {

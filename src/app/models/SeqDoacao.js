@@ -13,23 +13,29 @@ const Donation = db.define("Donation", {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    id_doador: {
+    id_doc_doador: {
         type: DataTypes.STRING,
         allowNull: false,
-        foreignKey: true,
     },
-    id_ong: {
+    id_doc_ong: {
         type: DataTypes.STRING,
         allowNull: false,
-        foreignKey: true,
     },
-    id_documento: {
+    id_doc_donation: {
         type: DataTypes.STRING,
         allowNull: false,
     },
 });
 
-Donation.belongsToMany(Donator, { foreignKey: "id_doador" });
-Donation.belongsToMany(Organization, { foreignKey: "id_ong" });
+
+Donator.belongsToMany(Organization, {
+    through: "Donation",
+});
+
+
+Organization.belongsToMany(Donator, {
+    through: "Donation",
+});
+
 
 module.exports = Donation;

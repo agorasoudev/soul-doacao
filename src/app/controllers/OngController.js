@@ -68,7 +68,7 @@ class OngController {
                 email: contato.email,
                 telefone: contato.telefone,
                 caixa,
-                id_documento: ong._id.toString(),
+                id_doc_ong: ong._id.toString(),
             }
             await Organization.create(osc);
 

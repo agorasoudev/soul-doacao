@@ -6,7 +6,7 @@ const swaggerDocument = require("./swagger_output.json");
 const conn = require("./db/conn");
 
 const app = express();
-const port = 3333;
+const port = 3335;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
