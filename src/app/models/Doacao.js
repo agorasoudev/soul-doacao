@@ -12,6 +12,7 @@ const Doacao = model( // Cria o modelo do MongoDB
             quantidade: Number,
         },
         hash: String,
+        data: String,
     })
 );
 
