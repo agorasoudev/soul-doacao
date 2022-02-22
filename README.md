@@ -75,7 +75,7 @@ npm run dev
 <details>
   <summary>Ongs</summary>
   <ul>
-    <li>Create: POST: localhost:3333/ong/new
+    <li>Create: POST: <code>localhost:3333/ong/create</code>
     <p>Todos os campos com exceção de site e telefone são obrigatórios para se registrar uma ONG.</p>
     <p>Segue exemplo de JSON.:</p>
 
@@ -101,6 +101,10 @@ npm run dev
   <li>Read One: GET: <code>localhost:3333/ong/:id</code>
   <p>Necessário informar o ID da ong na URI.</p>
   <p>O ID será gerado automaticamente na hora da criação da ONG</p>
+  </li>
+  <li>UPDATE: PATCH: <code>localhost:3333/ong/:id</code>
+  <p>Necessário informar o ID da ong na URI.</p>
+  <p>O ID será gerado automaticamente na hora da criação da ONG</p>
   <p>Passar o que deseja alterar no body. (os campos não são obrigatórios)</p>
 
   ```shell
@@ -119,10 +123,6 @@ npm run dev
 }
 ```
   </li>
-  <li>UPDATE: PATCH: <code>localhost:3333/ong/:id</code>
-  <p>Necessário informar o ID da ong na URI.</p>
-  <p>O ID será gerado automaticamente na hora da criação da ONG</p>
-  </li>
   <li>DESTROY: DELETE: <code>localhost:3333/ong</code>
   <p>Informe o ID ou o E-mail da ONG que deseja deletar no body.</p>
   <p>OBS: Caso informe os 2, o ID será priorizado</p>
@@ -136,6 +136,97 @@ npm run dev
   </li>
   </ul>
 </details>
+<details>
+  <summary>Doador</summary>
+  <ul>
+    <li>Create: POST: <code>localhost:3333/doador/create</code>
+    <p>Cadastra um novo doador. Os únicos dados obrigatórios são o nome e o email.</p>
+    <p>Segue exemplo de JSON.:</p>
+
+```shell
+{
+  "name": "José Vinicius",
+  "estado": "PE",
+  "contato": {
+    "email": "vini_dev@gmail.com",
+    "telefone": "81999999999"
+  }
+}
+```
+  </li>
+  <li>Read All: GET: <code>localhost:3333/doadores</code> 
+  <p>Ao executar, será retornado uma lista com todos os doadores cadastradas.</p>
+  </li>
+  <li>Read One: GET: <code>localhost:3333/doador/:id</code>
+  <p>Necessário informar o ID do doador na URI.</p>
+  <p>O ID será gerado automaticamente na hora da criação do doador</p>
+  </li>
+  <li>UPDATE: PATCH: <code>localhost:3333/doador/:id</code>
+  <p>Necessário informar o ID do doador na URI.</p>
+  <p>O ID será gerado automaticamente na hora da criação do doador</p>
+  <p>Passar o que deseja alterar no body. (os campos não são obrigatórios)</p>
+
+  ```shell
+{
+  "name": "José Vinicius",
+  "estado": "PE",
+  "contato": {
+    "email": "vini_dev@gmail.com",
+    "telefone": "81999999999"
+  }
+}
+```
+  </li>
+  <li>DESTROY: DELETE: <code>localhost:3333/doador/:id</code>
+  <p>Informe o ID do doador que deseja deletar na URI.</p>
+  </li>
+  </ul>
+</details>
+<details>
+  <summary>Voluntários</summary>
+  <ul>
+    <li>Create: POST: <code>localhost:3333/voluntario/create</code>
+    <p>Cadastra um novo voluntario. Os únicos dados obrigatórios são o nome e o email.</p>
+    <p>Segue exemplo de JSON.:</p>
+
+```shell
+{
+  "name": "Alexandre",
+  "email": "ale@gmail.com",
+  "telefone": "11999999999"
+}
+```
+  </li>
+  <li>Read All: GET: <code>localhost:3333/voluntarios</code> 
+  <p>Ao executar, será retornado uma lista com todos os voluntarios cadastradas.</p>
+  </li>
+  <li>Read One: GET: <code>localhost:3333/voluntario/:id</code>
+  <p>Necessário informar o ID do voluntario na URI.</p>
+  <p>O ID será gerado automaticamente na hora da criação do voluntario</p>
+  </li>
+  <li>UPDATE: PATCH: <code>localhost:3333/voluntario/:id</code>
+  <p>Necessário informar o ID do voluntario na URI.</p>
+  <p>O ID será gerado automaticamente na hora da criação do voluntario</p>
+  <p>Passar o que deseja alterar no body. (os campos não são obrigatórios)</p>
+
+  ```shell
+{
+  "name": "Alexandre",
+  "email": "ale@gmail.com",
+  "telefone": "11999999999"
+}
+```
+  </li>
+  <li>DESTROY: DELETE: <code>localhost:3333/voluntario/:id</code>
+  <p>Informe o ID do voluntario que deseja deletar na URI.</p>
+  </li>
+  </ul>
+</details>
+</div>
+<br>
+<div>
+<h2>&rArr; Acessando a documentação &lArr;</h2>
+<p>Apos a inicialização do servidor, é possível acessar a documentação com todas as rotas através da url <code>localhost:3333/api-doc</code></p>
 </div>
 <br>
 <div>

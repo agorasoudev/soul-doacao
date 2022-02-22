@@ -5,7 +5,7 @@ const Voluntario = model(
     new Schema({
         name: {type: String, required: true},
         contato: {
-            telefone: {type: String, required: true},
+            telefone: {type: String, required: false},
             email: {type: String, required: true},
         },
         funcao: {type: String, required: false}

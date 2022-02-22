@@ -5,7 +5,7 @@ import doadoresRoutes from './doadores.routes';
 import voluntariosRoutes from './voluntarios.routes'
 
 const routes = new Router()
-routes.use([
+routes.use('/',[
     doacaoRoutes,
     doadoresRoutes,
     ongRoutes,

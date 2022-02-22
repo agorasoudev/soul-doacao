@@ -21,15 +21,15 @@ const doc = {
         },
         {
             name: "Doador",
-            description: "EndPoint para ONGs",
+            description: "EndPoint para Doadores",
         },
         {
             name: "Doação",
-            description: "EndPoint para ONGs",
+            description: "EndPoint para Doações",
         },
         {
             name: "Voluntário",
-            description: "EndPoint para ONGs",
+            description: "EndPoint para Voluntários",
         },
     ],
 };

@@ -83,7 +83,7 @@ class OngController {
 
     static async show(req, res) {
         // #swagger.tags=["ONGs"]
-        // #swagger.description= End Point exibe todas as ONGs cadastradas
+        // #swagger.description= End Point exibe apenas uma ONG cadastrada passando o ID
         // #swagger.parameters['id'] = { description: 'ID da ONG', type: 'string', required: true }
         try {
             const ong = await Ong.findById(req.params.id);

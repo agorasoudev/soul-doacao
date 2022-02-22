@@ -14,15 +14,15 @@
     },
     {
       "name": "Doador",
-      "description": "EndPoint para ONGs"
+      "description": "EndPoint para Doadores"
     },
     {
       "name": "Doação",
-      "description": "EndPoint para ONGs"
+      "description": "EndPoint para Doações"
     },
     {
       "name": "Voluntário",
-      "description": "EndPoint para ONGs"
+      "description": "EndPoint para Voluntários"
     }
   ],
   "schemes": [
@@ -36,7 +36,244 @@
     "application/json"
   ],
   "paths": {
-    "/create": {
+    "/createdoacao/{id}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "metodo": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "ong": {
+                  "example": "any"
+                },
+                "valor": {
+                  "example": "any"
+                },
+                "item": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/doador/create": {
+      "post": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "Cadastra um Doador",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do Doador - os únicos dados obrigatórios são o nome e o email.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "José Vinicius"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "PE"
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "vini_dev@gmail.com"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "81999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "telefone"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "estado",
+                "contato"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
+    "/doadores": {
+      "get": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "End Point exibe todas os Doadores cadastrados",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
+    "/doador/{id}": {
+      "get": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do Doador"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "Atualização do Doador",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do Doador - os únicos dados obrigatórios são o nome e o email.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "José Vinicius"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "PE"
+                },
+                "contato": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "vini_dev@gmail.com"
+                    },
+                    "telefone": {
+                      "type": "string",
+                      "example": "81999999999"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "telefone"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "estado",
+                "contato"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Doador"
+        ],
+        "description": "Informe o ID do Doador para deletar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ong/create": {
       "post": {
         "tags": [
           "ONGs"
@@ -295,9 +532,139 @@
         }
       }
     },
-    "/createdoacao/{id}": {
+    "/voluntario/create": {
       "post": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "Cadastra um voluntário",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do Voluntário",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Alexandre"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "ale@gmail.com"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "11999999999"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "telefone"
+              ]
+            },
+            "$função": "Diretor"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/voluntarios": {
+      "get": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "End Point exibe todos os Voluntários cadastradas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
+    "/voluntario/{id}": {
+      "get": {
+        "tags": [
+          "Voluntário"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do voluntário"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "Atualização do voluntário",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados do voluntário",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Alexandre"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "ale@gmail.com"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "11999999999"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "telefone"
+              ]
+            },
+            "$função": "Diretor"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [
+          "Voluntário"
+        ],
+        "description": "Informe o ID do voluntário que deseja deletar.",
         "parameters": [
           {
             "name": "id",
@@ -311,55 +678,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "metodo": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "ong": {
-                  "example": "any"
-                },
-                "valor": {
-                  "example": "any"
-                },
-                "item": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        }
-      }
-    },
-    "/createdoador": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "contato": {
-                  "example": "any"
-                },
-                "estado": {
-                  "example": "any"
-                },
-                "anonimo": {
-                  "example": "any"
-                },
-                "doacao": {
+                "id": {
                   "example": "any"
                 }
               }
@@ -369,39 +688,12 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/create/voluntario": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "contato": {
-                  "example": "any"
-                },
-                "funcao": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
           },
-          "402": {
-            "description": "Payment Required"
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
