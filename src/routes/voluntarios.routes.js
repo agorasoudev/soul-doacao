@@ -7,6 +7,6 @@ voluntariosRoutes.post("/voluntario/create", VoluntarioController.store),
 voluntariosRoutes.get("/voluntarios", VoluntarioController.index),
 voluntariosRoutes.get("/voluntario/:id", VoluntarioController.show),
 voluntariosRoutes.patch("/voluntario/:id", VoluntarioController.update);
-voluntariosRoutes.delete("/voluntario/:id", VoluntarioController.destroy);
+voluntariosRoutes.delete("/voluntario", VoluntarioController.destroy);
 
 export default voluntariosRoutes;
