@@ -1,4 +1,5 @@
 import Doador from "../models/Doador";
+import Donator from '../models/SeqDoador'
 
 class DoadorController {
     static async store(req, res) {
@@ -42,6 +43,16 @@ class DoadorController {
         }
 
         await doador.save();
+  
+        const donator = {
+            name,
+            email: contato.email,
+            telefone: contato.telefone,
+            id_documento: doador._id.toString(),
+        }
+
+        await Donator.create(donator);
+
         return res
             .status(201)
             .json({ message: `doador-${doador.name}-cadastrado` });

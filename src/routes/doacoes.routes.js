@@ -3,6 +3,6 @@ import DoacaoController from '../app/controllers/DoacaoController';
 
 const doacaoRoutes = new Router()
 
-doacaoRoutes.post('/createdoacao/:id', DoacaoController.createDoacao);
+doacaoRoutes.post('/createdoacao', DoacaoController.createDoacao);
 
 export default doacaoRoutes;
