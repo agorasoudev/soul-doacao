@@ -5,7 +5,7 @@
     "title": "Soul Doações",
     "description": "API para integração entre ONGs e doadores"
   },
-  "host": "localhost:3335",
+  "host": "localhost:3333",
   "basePath": "/",
   "tags": [
     {
@@ -38,7 +38,10 @@
   "paths": {
     "/createdoacao/{id}": {
       "post": {
-        "description": "",
+        "tags": [
+          "Doação"
+        ],
+        "description": "Cadastra uma Doação",
         "parameters": [
           {
             "name": "id",
@@ -47,27 +50,36 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Dados da Doação",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "metodo": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "pix"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "sabrino@gmail.com"
                 },
                 "ong": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "CasaCasa"
                 },
                 "valor": {
-                  "example": "any"
-                },
-                "item": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 100
                 }
-              }
+              },
+              "required": [
+                "metodo",
+                "email",
+                "ong",
+                "valor"
+              ]
             }
           }
         ],
@@ -86,7 +98,10 @@
     },
     "/doacoes": {
       "get": {
-        "description": "",
+        "tags": [
+          "Doação"
+        ],
+        "description": "End Point exibe todas as Doações cadastradas",
         "parameters": [],
         "responses": {
           "200": {
@@ -100,13 +115,17 @@
     },
     "/doacao/{id}": {
       "get": {
+        "tags": [
+          "Doação"
+        ],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID da doação"
           }
         ],
         "responses": {
@@ -122,13 +141,49 @@
         }
       },
       "patch": {
-        "description": "",
+        "tags": [
+          "Doação"
+        ],
+        "description": "Atualização de Doação",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Dados da doação que deseja alterar.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "metodo": {
+                  "type": "string",
+                  "example": "pix"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "sabrino@gmail.com"
+                },
+                "ong": {
+                  "type": "string",
+                  "example": "CasaCasa"
+                },
+                "valor": {
+                  "type": "number",
+                  "example": 100
+                }
+              },
+              "required": [
+                "metodo",
+                "email",
+                "ong",
+                "valor"
+              ]
+            }
           }
         ],
         "responses": {
@@ -144,7 +199,10 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Doação"
+        ],
+        "description": "Informe o ID da Doação que deseja deletar",
         "parameters": [
           {
             "name": "id",
