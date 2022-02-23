@@ -39,37 +39,23 @@ class OngController {
                 message: `Os campos ${empty.join(", ")} não podem ser vazios`,
             });
         } else {
-            const {
-                name,
-                endereco,
-                segmento,
-                cnpj,
-                n_funcionarios,
-                voluntarios,
-                contato,
-                caixa,
-            } = req.body;
+            const { name, endereco, segmento, cnpj,
+                n_funcionarios, voluntarios, contato,
+                caixa, } = req.body;
 
-            const ong = Ong({
-                name,
-                endereco,
-                segmento,
-                cnpj,
-                n_funcionarios,
-                voluntarios,
-                contato,
-                caixa,
-            });
-            await ong.save();
+            const ong = Ong({ name, endereco, segmento,
+                cnpj, n_funcionarios, voluntarios,
+                contato, caixa, });
+            
+                await ong.save();
 
-            const osc = {
-                name,
-                cnpj,
+            const osc = { name, cnpj,
                 email: contato.email,
                 telefone: contato.telefone,
                 caixa,
                 id_doc_ong: ong._id.toString(),
             }
+            
             await Organization.create(osc);
 
             return res.status(201).json(ong);

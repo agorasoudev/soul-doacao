@@ -39,6 +39,8 @@
     <img src="https://img.shields.io/badge/nodemon-4EA94B?style=for-the-badge&logo=nodemon&logoColor=gray">
     <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB">
     <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
+    <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
+    <img src="https://img.shields.io/badge/sequelize-018bff?style=for-the-badge&logo=sequelize&logoColor=white">
     <img src="https://img.shields.io/badge/Sucrase-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white">
     <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white">
   </div>
